@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 #define is_whitespace(c) (c == ' ' || c == '\t' || c == '\n')
-#define MAX_WORD_LEN 20
+#define MAX_WORD_LEN 30
 
 void print_histogram(int word_lengths[MAX_WORD_LEN]);
 
@@ -21,17 +21,19 @@ int main()
 
 	while ((c = getchar()) != EOF) {
 		if (is_whitespace(c)) {
-			if (!is_whitespace(prev)) {
+			/* if (!is_whitespace(prev) && count < MAX_WORD_LEN) { */
 				word_lengths[count]++;
 				count = 0;
-			}
+			/* } */
 		} else {
 			count++;
 			max_len = (count > max_len) ? count : max_len;
 		}
 		prev = c;
 	}
-	word_lengths[count]++;
+	/* if (count < MAX_WORD_LEN) { */
+		word_lengths[count]++;
+	/* } */
 
 	print_histogram(word_lengths);
 }
@@ -49,9 +51,9 @@ void print_histogram(int word_lengths[MAX_WORD_LEN])
 	for (int i = num_rows; i > 0; i--) {
 		for (int j = 1; j < MAX_WORD_LEN; j++) {
 			if (word_lengths[j] >= i) {
-				printf("= ");
+				printf("# ");
 			} else {
-				printf(". ");
+				printf("  ");
 			}
 		}
 		printf("\n");
