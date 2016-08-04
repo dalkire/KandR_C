@@ -1,46 +1,27 @@
 /*
- * Exercise 1-14.
- * Write a program to print a histogram of the frequencies of different
- * characters in its input.
+ * Exercise 1-15.
+ * Rewrite the temperature conversion program of Section 1.2 to
+ * use a function for conversion.
  */
 #include <stdio.h>
 
-#define is_whitespace(c) (c == ' ' || c == '\t' || c == '\n')
-#define MAX_CHARS 128
-
-void print_histogram(int word_lengths[MAX_CHARS]);
+float fahr_to_celsius(float fahr);
 
 int main()
 {
-	int c;
-	int characters[MAX_CHARS] = {0};
+	int lower = 0;
+	int upper = 300;
+	int step = 20;
+	float fahr = lower;
 
-	while ((c = getchar()) != EOF) {
-		if (c < MAX_CHARS) {
-			characters[c]++;
-		}
+	printf("Fahrenheit  Celsius\n");
+	while (fahr <= upper) {
+		printf("%10.0f %8.1f\n", fahr, fahr_to_celsius(fahr));
+		fahr += step;
 	}
-	print_histogram(characters);
 }
 
-void print_histogram(int word_lengths[MAX_CHARS])
+float fahr_to_celsius(float fahr)
 {
-	int num_rows = 0;
-	printf("\n");
-	for (int i = 0; i < MAX_CHARS; i++) {
-		if (word_lengths[i] > num_rows) {
-			num_rows = word_lengths[i];
-		}
-	}
-
-	for (int i = num_rows; i > 0; i--) {
-		for (int j = 1; j < MAX_CHARS; j++) {
-			if (word_lengths[j] >= i) {
-				printf("# ");
-			} else {
-				printf("  ");
-			}
-		}
-		printf("\n");
-	}
+	return (5.0 / 9.0) * (fahr - 32.0);
 }
