@@ -12,10 +12,8 @@ int _getline(char line[], int maxline);
 int main()
 {
 	int len;
-	int max;
 	char line[MAXLINE];
 
-	max = 0;
 	while ((len = _getline(line, MAXLINE)) > 0) {
 		if (len > 80) {
 			printf("\n%d chars: %s\n", len, line);
